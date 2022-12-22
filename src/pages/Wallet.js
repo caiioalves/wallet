@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../Componentes/Header';
 import { excluir, fetchApiCotaçaoThunk, fetchApiMoedasThunk } from '../actions';
-import { Box, Button, Container, FormControl, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material';
+import { Box, Button, Container, FormControl, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material';
 import { Tema } from '../Componentes/Tema';
+
+
 
 class Wallet extends React.Component {
   state = {
@@ -22,8 +24,16 @@ class Wallet extends React.Component {
   }
 
   handleChange = (e) => {
+    console.log(e.target.value);
+    console.log(e.target);
+    // console.log(e.target.getAttribute('name'));
     this.setState({ [e.target.id]: e.target.value });
   }
+
+  handleChangeSelects = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
 
   handleClick = async () => {
     const { dispatch, expensesValue } = this.props;
@@ -50,12 +60,11 @@ class Wallet extends React.Component {
     const { despesas, descricao, moeda, pagamento, categoria, valorBrl } = this.state;
     return (
       <ThemeProvider theme={Tema}>
-      <Container sx={{ height: "100vh" }}>
+      <Box sx={{ height: "100vh" }}>
         <Header valorBrl={ valorBrl } />
         <FormControl
           sx={{
-            width:"100%",
-            mt: 5,
+            mt:5,
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
@@ -63,11 +72,8 @@ class Wallet extends React.Component {
           }}
         >
           <TextField
-            sx={{
-              width:"10%",
-              ml: 2,
-              mr: 2,
-            }}
+            sx={{minWidth: "10%", maxWidth: "20%"}}
+            name="moeda"
             label="Valor"
             variant="outlined"
             value={ despesas }
@@ -77,11 +83,7 @@ class Wallet extends React.Component {
             data-testid="value-input"
           />
           <TextField
-            sx={{
-              ml: 2,
-              mr: 2,
-              width:"10%",
-            }}
+            sx={{minWidth: "10%", maxWidth: "20%"}}
             value={ descricao }
             onChange={ this.handleChange }
             id="descricao"
@@ -89,65 +91,63 @@ class Wallet extends React.Component {
             data-testid="description-input"
             type="text"
           />
-          {/* <label
-            htmlFor="moeda"
-          >
-            Moedas */}
-            <Box sx={{ ml: 2, mr: 2, }}>
-            <select
-              width="10%"
+            <Select
+              sx={{minWidth: "10%", maxWidth: "20%"}}
               value={ moeda }
-              onChange={ this.handleChange }
+              name="moeda"
+              onChange={ this.handleChangeSelects }
               id="moeda"
             >
               { Array.isArray(currencies) ? (currencies.map((valor, index) => (
-                <option key={ index }>{valor}</option>
+                <MenuItem value={valor} name="moeda" key={ index }>{valor}</MenuItem>
               ))) : undefined }
-          </select>
-          </Box>
-          <Box sx={{ ml: 2, mr: 2, }}>
-          <select
-            width="10%"
+          </Select>
+          <Select
+            sx={{minWidth: "10%", maxWidth: "20%"}}
             value={ pagamento }
-            onChange={ this.handleChange }
-            id="pagamento"
+            onChange={ this.handleChangeSelects }
+            name="pagamento"
             data-testid="method-input"
           >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </select>
-          </Box>
-          <Box sx={{ ml: 2, mr: 2, }}>
-          <select
+            <MenuItem value="Dinheiro">Dinheiro</MenuItem>
+            <MenuItem value="Cartão de crédito">Cartão de crédito</MenuItem>
+            <MenuItem value="Cartão de débito">Cartão de débito</MenuItem>
+          </Select>
+          <Select
+            sx={{minWidth: "10%", maxWidth: "20%"}}
             value={ categoria }
-            onChange={ this.handleChange }
-            id="categoria"
+            onChange={ this.handleChangeSelects }
+            name="categoria"
             data-testid="tag-input"
           >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </select>
-          </Box>
+            <MenuItem value="Alimentação">Alimentação</MenuItem>
+            <MenuItem value="Lazer">Lazer</MenuItem>
+            <MenuItem value="Trabalho">Trabalho</MenuItem>
+            <MenuItem value="Transporte">Transporte</MenuItem>
+            <MenuItem value="Saúde">Saúde</MenuItem>
+          </Select>
+        </FormControl>
+        <Box 
+          justifyContent="center"
+          display="flex"
+          mt={3}
+        >
           <Button
-            sx={{ ml: 2, mr: 2, }}
             onClick={ this.handleClick }
             type="button"
             variant="contained"
           >
             Adicionar despesa
           </Button>
-        </FormControl>
+        </Box>
+        <Container>
         <TableContainer
           component={Paper}
           sx={{
             mt: 3
           }}
         >
-          <Table>
+          <Table sx={{ minWidth: 200 }} size="small">
           <TableHead>
             <TableRow >
               <TableCell>Descrição</TableCell>
@@ -199,7 +199,8 @@ class Wallet extends React.Component {
           </TableBody>
           </Table>
         </TableContainer>
-      </Container>
+        </Container>
+      </Box>
       </ThemeProvider>
       );
   }
