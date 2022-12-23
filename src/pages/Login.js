@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import userEmail from '../actions';
-import { Box, Button, Container, Paper, Stack, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Box, Button, Paper, Stack, TextField, ThemeProvider, Typography } from '@mui/material';
 import { Tema } from '../Componentes/Tema';
 
 class Login extends React.Component {
