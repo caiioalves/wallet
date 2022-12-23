@@ -15,6 +15,7 @@ class Wallet extends React.Component {
     pagamento: 'Dinheiro',
     categoria: 'Alimentação',
     valorBrl: 0,
+    disabled: true
   }
 
   componentDidMount = () => {
@@ -24,6 +25,14 @@ class Wallet extends React.Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
+  }
+
+  handleChangeValor =(e) => {
+    this.setState({ [e.target.id]: e.target.value });
+
+    if( e.target.value <= 0) {
+      this.setState({disabled: true})
+    } else {this.setState({disabled: false})}
   }
 
   handleChangeSelects = (e) => {
@@ -53,7 +62,7 @@ class Wallet extends React.Component {
 
   render() {
     const { currencies, expensesValue, dispatch } = this.props;
-    const { despesas, descricao, moeda, pagamento, categoria, valorBrl } = this.state;
+    const { despesas, descricao, moeda, pagamento, categoria, valorBrl, disabled } = this.state;
     return (
       <ThemeProvider theme={Tema}>
       <Box height="100vh" >
@@ -74,7 +83,7 @@ class Wallet extends React.Component {
             label="Valor"
             variant="outlined"
             value={ despesas }
-            onChange={ this.handleChange }
+            onChange={ this.handleChangeValor }
             id="despesas"
             type="number"
           />
@@ -130,6 +139,7 @@ class Wallet extends React.Component {
           mt={3}
         >
           <Button
+            disabled={disabled}
             sx={{ fontWeight: "bold" }}
             onClick={ this.handleClick }
             type="button"
