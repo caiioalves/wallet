@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import userEmail from '../actions';
-import { Box, Button, Container, CssBaseline, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, Stack, TextField, ThemeProvider, Typography } from '@mui/material';
 import { Tema } from '../Componentes/Tema';
 
 class Login extends React.Component {
@@ -36,51 +36,46 @@ class Login extends React.Component {
     const { disabled, email, senha } = this.state;
     return (
       <ThemeProvider theme={Tema}>
-      <Container
-      sx={{
-        mt: -8,
-        display: "flex",
-        width: "100vw",
-        height: "109vh",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      <Stack alignItems="center" height="100vh" justifyContent="center"
+      // sx={{
+      //   mt: -8,
+      //   display: "flex",
+      //   width: "100vw",
+      //   height: "109vh",
+      //   alignItems: "center",
+      //   justifyContent: "center",
+      // }}
       >
-        <CssBaseline />
         <Paper
         elevation={3}
         sx={{
-          backgroundColor: "#FFFFFF",
-          minWidth: "40%",
-          maxWidth: "90%",
-          height: "60%",
-          padding: "3%",
+          padding: "5%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          borderRadius: "5%"
         }}
         >
         <Typography
           component="h1"
           variant="h5"
-          sx={{ mb: 2, color: "#39E088" }}
+          color="primary"
+          fontWeight="bold"
+          sx={{ textDecoration: "underline", mb: 6 }}
         >
-          Entrar
+          Sign-In
         </Typography>
         <Box
           className="formulario-inputs"
           sx={{
-            mt: 1 ,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            minWidth: "90%", maxWidth: "90%"
           }}
         >
           <TextField
-            sx={{ mt: 2, mb: 2, width: "90%" }}
+            sx={{ mb: 2}}
             margin="normal"
-            required
             id="email"
             label="Email"
             variant="outlined"
@@ -90,7 +85,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <TextField
-            sx={{ mt: 2, mb: 2, width: "90%"}}
+            // sx={{ mt: 2, mb: 2, width: "90%"}}
             type="password"
             id="senha"
             variant="outlined"
@@ -102,16 +97,16 @@ class Login extends React.Component {
           />
         </Box>
         <Button
+          color="secondary"
           variant="contained"
-          sx={{ mt: 3, mb: 2, backgroundColor: "primary" }}
-          type="button"
+          sx={{ mt: 4, fontWeight: "bold" }}
           disabled={ disabled }
           onClick={ this.handleClick }
         >
           Entrar
         </Button>
         </Paper>
-      </Container>
+      </Stack>
       </ThemeProvider>
     );
   }
