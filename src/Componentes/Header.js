@@ -11,12 +11,11 @@ class Header extends React.Component {
         <Stack p={2} direction="row" spacing={2} justifyContent="space-between">
         <Box>{ email }</Box>
         <Box>
-          {
+          {`R$ ${
             despesas.reduce((prevValor, valor) => (
               prevValor + valor.value * Number(valor.exchangeRates[valor.currency].ask)
             ), 0).toFixed(2)
-          }
-          BRL
+          }`}
         </Box>
         </Stack>
       </AppBar>
