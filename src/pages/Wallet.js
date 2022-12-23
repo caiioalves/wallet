@@ -7,14 +7,13 @@ import { Box, Button, Container, FormControl, MenuItem, Paper, Select, Table, Ta
 import { Tema } from '../Componentes/Tema';
 
 
-
 class Wallet extends React.Component {
   state = {
     despesas: 0,
     descricao: '',
     moeda: 'USD',
     pagamento: 'Dinheiro',
-    categoria: 'Alimentaçao',
+    categoria: 'Alimentação',
     valorBrl: 0,
   }
 
@@ -24,9 +23,6 @@ class Wallet extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value);
-    console.log(e.target);
-    // console.log(e.target.getAttribute('name'));
     this.setState({ [e.target.id]: e.target.value });
   }
 
@@ -52,7 +48,7 @@ class Wallet extends React.Component {
       descricao: '',
       moeda: 'USD',
       pagamento: 'Dinheiro',
-      categoria: 'Alimentaçao' });
+      categoria: 'Alimentação' });
   }
 
   render() {
@@ -60,19 +56,20 @@ class Wallet extends React.Component {
     const { despesas, descricao, moeda, pagamento, categoria, valorBrl } = this.state;
     return (
       <ThemeProvider theme={Tema}>
-      <Box sx={{ height: "100vh" }}>
+      <Box height="100vh" >
         <Header valorBrl={ valorBrl } />
         <FormControl
           sx={{
             mt:5,
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
+        > 
+        <Box 
+        sx={{width: "90%", display: "flex", justifyContent: "center"}}
         >
           <TextField
-            sx={{minWidth: "10%", maxWidth: "20%"}}
+            sx={{width: "40%"}}
             name="moeda"
             label="Valor"
             variant="outlined"
@@ -80,10 +77,9 @@ class Wallet extends React.Component {
             onChange={ this.handleChange }
             id="despesas"
             type="number"
-            data-testid="value-input"
           />
           <TextField
-            sx={{minWidth: "10%", maxWidth: "20%"}}
+            sx={{width: "40%"}}
             value={ descricao }
             onChange={ this.handleChange }
             id="descricao"
@@ -91,8 +87,10 @@ class Wallet extends React.Component {
             data-testid="description-input"
             type="text"
           />
+          </Box>
+          <Box sx={{width: "90%", display: "flex", justifyContent: "center"}}>
             <Select
-              sx={{minWidth: "10%", maxWidth: "20%"}}
+              sx={{width: "30%"}}
               value={ moeda }
               name="moeda"
               onChange={ this.handleChangeSelects }
@@ -103,22 +101,20 @@ class Wallet extends React.Component {
               ))) : undefined }
           </Select>
           <Select
-            sx={{minWidth: "10%", maxWidth: "20%"}}
+          sx={{width: "30%"}}
             value={ pagamento }
             onChange={ this.handleChangeSelects }
             name="pagamento"
-            data-testid="method-input"
           >
             <MenuItem value="Dinheiro">Dinheiro</MenuItem>
             <MenuItem value="Cartão de crédito">Cartão de crédito</MenuItem>
             <MenuItem value="Cartão de débito">Cartão de débito</MenuItem>
           </Select>
           <Select
-            sx={{minWidth: "10%", maxWidth: "20%"}}
+          sx={{width: "30%"}}
             value={ categoria }
             onChange={ this.handleChangeSelects }
             name="categoria"
-            data-testid="tag-input"
           >
             <MenuItem value="Alimentação">Alimentação</MenuItem>
             <MenuItem value="Lazer">Lazer</MenuItem>
@@ -126,6 +122,7 @@ class Wallet extends React.Component {
             <MenuItem value="Transporte">Transporte</MenuItem>
             <MenuItem value="Saúde">Saúde</MenuItem>
           </Select>
+          </Box>
         </FormControl>
         <Box 
           justifyContent="center"
@@ -133,8 +130,10 @@ class Wallet extends React.Component {
           mt={3}
         >
           <Button
+            sx={{ fontWeight: "bold" }}
             onClick={ this.handleClick }
             type="button"
+            color="secondary"
             variant="contained"
           >
             Adicionar despesa
@@ -147,7 +146,7 @@ class Wallet extends React.Component {
             mt: 3
           }}
         >
-          <Table sx={{ minWidth: 200 }} size="small">
+          <Table>
           <TableHead>
             <TableRow >
               <TableCell>Descrição</TableCell>
@@ -158,7 +157,7 @@ class Wallet extends React.Component {
               <TableCell>Câmbio utilizado</TableCell>
               <TableCell>Valor convertido</TableCell>
               <TableCell>Moeda de conversão</TableCell>
-              <TableCell>Editar/Excluir</TableCell>
+              <TableCell>Excluir</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -181,10 +180,10 @@ class Wallet extends React.Component {
                 <TableCell >Real</TableCell>
                 <TableCell >
                   <Button
+                    sx={{ fontWeight: "bold" }}
                     variant="contained"
-                    color="secondary"
+                    color="others"
                     type="button"
-                    data-testid="delete-btn"
                     onClick={ async () => {
                       const novoArray = expensesValue.slice();
                       novoArray.splice(indice, 1);
