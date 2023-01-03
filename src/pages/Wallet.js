@@ -56,6 +56,7 @@ class Wallet extends React.Component {
     this.setState({ despesas: 0,
       descricao: '',
       moeda: 'USD',
+      disabled: true,
       pagamento: 'Dinheiro',
       categoria: 'Alimentação' });
   }
@@ -65,7 +66,9 @@ class Wallet extends React.Component {
     const { despesas, descricao, moeda, pagamento, categoria, valorBrl, disabled } = this.state;
     return (
       <ThemeProvider theme={Tema}>
-      <Box height="100vh" >
+      <Box
+        height="100vh"
+      >
         <Header valorBrl={ valorBrl } />
         <FormControl
           sx={{
