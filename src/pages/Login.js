@@ -37,14 +37,9 @@ class Login extends React.Component {
     return (
       <ThemeProvider theme={Tema}>
       <Stack alignItems="center" height="100vh" justifyContent="center"
-      // sx={{
-      //   mt: -8,
-      //   display: "flex",
-      //   width: "100vw",
-      //   height: "109vh",
-      //   alignItems: "center",
-      //   justifyContent: "center",
-      // }}
+        sx={{
+          background: 'radial-gradient(circle, rgba(33,126,213,1) 33%, rgba(0,212,255,1) 100%)'
+        }}
       >
         <Paper
         elevation={3}
@@ -67,6 +62,7 @@ class Login extends React.Component {
         </Typography>
         <Box
           className="formulario-inputs"
+          // color="colorInput"
           sx={{
             display: "flex",
             flexDirection: "column",

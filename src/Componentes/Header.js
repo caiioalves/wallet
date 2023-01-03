@@ -7,7 +7,13 @@ class Header extends React.Component {
   render() {
     const { email, despesas } = this.props;
     return (
-      <AppBar position="static">
+      <AppBar
+        // color='secondary'
+        position="static"
+        sx={{
+          background: 'linear-gradient(180deg, rgba(33,126,213,1) 23%, rgba(0,212,255,1) 100%)'
+        }}
+      >
         <Stack p={2} direction="row" spacing={2} justifyContent="space-between">
         <Box>{ email }</Box>
         <Box>
