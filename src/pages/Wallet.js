@@ -67,7 +67,12 @@ class Wallet extends React.Component {
     return (
       <ThemeProvider theme={Tema}>
       <Box
-        height="100vh"
+        height="100%"
+        sx={{
+          backgroundColor: 'whitesmoke',
+          backgroundAttachment: 'fixed'
+        }}
+        // bgcolor="red"
       >
         <Header valorBrl={ valorBrl } />
         <FormControl
@@ -152,7 +157,7 @@ class Wallet extends React.Component {
             Adicionar despesa
           </Button>
         </Box>
-        <Container>
+        <Container sx={{ mb: 5 }}>
         <TableContainer
           component={Paper}
           sx={{
