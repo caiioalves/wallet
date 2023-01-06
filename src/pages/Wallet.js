@@ -83,10 +83,10 @@ class Wallet extends React.Component {
           }}
         > 
         <Box 
-        sx={{width: "90%", display: "flex", justifyContent: "center"}}
+        sx={{width: "90%", display: "flex", justifyContent: "center", flexWrap: 'wrap', gap: 3}}
         >
           <TextField
-            sx={{width: "40%"}}
+            sx={{width:  {xs: '30%', md: '10%'}}}
             name="moeda"
             label="Valor"
             variant="outlined"
@@ -96,7 +96,8 @@ class Wallet extends React.Component {
             type="number"
           />
           <TextField
-            sx={{width: "40%"}}
+            sx={{width:  {xs: '30%', md: '10%'}}}
+            // sx={{width: "10%"}}
             value={ descricao }
             onChange={ this.handleChange }
             id="descricao"
@@ -104,10 +105,10 @@ class Wallet extends React.Component {
             data-testid="description-input"
             type="text"
           />
-          </Box>
-          <Box sx={{width: "90%", display: "flex", justifyContent: "center"}}>
+          {/* </Box> */}
+          {/* <Box sx={{width: "90%", display: "flex", justifyContent: "center"}}> */}
             <Select
-              sx={{width: "30%"}}
+              // sx={{width: "30%"}}
               value={ moeda }
               name="moeda"
               onChange={ this.handleChangeSelects }
@@ -118,7 +119,7 @@ class Wallet extends React.Component {
               ))) : undefined }
           </Select>
           <Select
-          sx={{width: "30%"}}
+          // sx={{width: "30%"}}
             value={ pagamento }
             onChange={ this.handleChangeSelects }
             name="pagamento"
@@ -128,7 +129,7 @@ class Wallet extends React.Component {
             <MenuItem value="Cartão de débito">Cartão de débito</MenuItem>
           </Select>
           <Select
-          sx={{width: "30%"}}
+          // sx={{width: "30%"}}
             value={ categoria }
             onChange={ this.handleChangeSelects }
             name="categoria"
