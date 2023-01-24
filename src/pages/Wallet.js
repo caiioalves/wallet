@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Header from '../Componentes/Header';
+import Header from '../componentes/Header';
 import { excluir, fetchApiCotaçaoThunk, fetchApiMoedasThunk } from '../actions';
-import { Box, Button, Container, FormControl, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material';
-import { Tema } from '../Componentes/Tema';
+import { Box, Button, Container, FormControl, MenuItem, Paper, Select, Table, TableBody, TableCell, 
+TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material';
+import { Tema } from '../componentes/Tema';
 
 
 class Wallet extends React.Component {
@@ -18,7 +19,7 @@ class Wallet extends React.Component {
     disabled: true
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { dispatch } = this.props;
     dispatch(fetchApiMoedasThunk());
   }

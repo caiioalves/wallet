@@ -5,11 +5,12 @@ import userEmail from '../actions';
 import { Box, Button, Paper, Stack, TextField, ThemeProvider, Typography } from '@mui/material';
 import { Tema } from '../componentes/Tema';
 
-class Login extends React.Component {
+class Register extends React.Component {
   state = {
     disabled: true,
     email: '',
     senha: '',
+    user: '',
   }
 
   handleChange = (e) => {
@@ -33,42 +34,53 @@ class Login extends React.Component {
   }
 
   render() {
-    const { disabled, email, senha } = this.state;
+    const { disabled, email, senha, user } = this.state;
     return (
       <ThemeProvider theme={Tema}>
-      <Stack alignItems="center" height="100vh" justifyContent="center"
-        sx={{
-          background: 'radial-gradient(circle, rgba(33,126,213,1) 33%, rgba(0,212,255,1) 100%)'
-        }}
-      >
-        <Paper
-        elevation={3}
-        sx={{
-          padding: "5%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          borderRadius: "5%"
-        }}
-        >
-        <Typography
-          component="h1"
-          variant="h5"
-          color="primary"
-          fontWeight="bold"
-          sx={{ textDecoration: "underline", mb: 6 }}
-        >
-          Sign-In
-        </Typography>
-        <Box
-          className="formulario-inputs"
-          // color="colorInput"
+        <Stack alignItems="center" height="100vh" justifyContent="center"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            background: 'radial-gradient(circle, rgba(33,126,213,1) 33%, rgba(0,212,255,1) 100%)'
           }}
         >
+          <Paper
+            elevation={3}
+            sx={{
+              padding: "5%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: "5%"
+            }}
+          >
+            <Typography
+              component="h1"
+              variant="h5"
+              color="primary"
+              fontWeight="bold"
+              sx={{ textDecoration: "underline", mb: 6 }}
+            >
+              Sign-In
+            </Typography>
+            <Box
+              className="formulario-inputs"
+          // color="colorInput"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+          <TextField
+            sx={{ mb: 2}}
+            margin="normal"
+            id="user"
+            label="User name"
+            variant="outlined"
+            type="text"
+            data-testid="email-input"
+            value={ user }
+            onChange={ this.handleChange }
+          />
           <TextField
             sx={{ mb: 2}}
             margin="normal"
@@ -112,9 +124,9 @@ const mapStateToProps = (state) => ({
   email: state.email,
 });
 
-Login.propTypes = {
+Register.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Register);
